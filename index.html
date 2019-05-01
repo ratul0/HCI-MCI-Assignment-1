@@ -83,6 +83,18 @@
                   $(this).data('loaded', true);  
                 };  
             });
+
+            $("#faculty").on("pageAnimationEnd", function(e, info){
+              console.debug('id: ' + this.id + ' and direction: ' + info.direction);
+              // Load data once
+              if (!$(this).data('loaded')) {
+                  faculty_loadExternalLinks();
+                  acs_loadExternalLinks();
+                  cs_loadExternalLinks();
+                  is_loadExternalLinks();
+                  $(this).data('loaded', true);  
+                };  
+            });
           });
           //bachelor_loadExternalLinks() 
           
@@ -118,6 +130,46 @@
             });
             $('#studies').data('loaded', true);  
           }
+
+          function faculty_loadExternalLinks(){
+            $.each(JSON.parse(localStorage['faculty_externalLinks']), function() {
+              // build link
+              link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#facultyExternalLinks").append(link);
+            });
+            $('#faculty').data('loaded', true);  
+          }
+
+          function acs_loadExternalLinks(){
+            $.each(JSON.parse(localStorage['acs_externalLinks']), function() {
+              // build link
+              link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#acsExternalLinks").append(link);
+            });
+            $('#faculty').data('loaded', true);  
+          }
+
+          function cs_loadExternalLinks(){
+            $.each(JSON.parse(localStorage['cs_externalLinks']), function() {
+              // build link
+              link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#csExternalLinks").append(link);
+            });
+            $('#faculty').data('loaded', true);  
+          }
+
+          function is_loadExternalLinks(){
+            $.each(JSON.parse(localStorage['is_externalLinks']), function() {
+              // build link
+              link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#isExternalLinks").append(link);
+            });
+            $('#faculty').data('loaded', true);  
+          }
   </script>
 </head>
 <body>
@@ -130,8 +182,8 @@
     <h2>Curious About University of Bamberg?</h2>
     <ul class="rounded">
       <li class="arrow"><a href="#studies">Studies</a></li>
-      <li class="arrow"><a href="#research">Research</a></li>
       <li class="arrow"><a href="#faculty">The Faculty</a></li>
+      <li class="arrow"><a href="#research">Research</a></li>
       <li class="arrow"><a href="#subjectgroups">Subject Groups</a></li>
     </ul>
     <h2>External Links</h2>
@@ -148,13 +200,13 @@
 
     <div class="info">
       <p>
-          The <a href="https://en.wikipedia.org/wiki/University_of_Bamberg">University of Bamberg</a> (German: Otto-Friedrich-Universität Bamberg) in Bamberg, Germany, specializes in the Humanities, Cultural Studies, Social Sciences, Economics and Applied Computer Science.
+          The <a href="https://en.wikipedia.org/wiki/University_of_Bamberg" target="_blank">University of Bamberg</a> (German: Otto-Friedrich-Universität Bamberg) in Bamberg, Germany, specializes in the Humanities, Cultural Studies, Social Sciences, Economics and Applied Computer Science.
       </p>
       <br>
       <p>
         Establied on 1647 (initial) then re-founded on 1972. Current chancellor is Dagmar Steuer-Flieser and Current Precident is Godehard Ruppert.
       </p>
-      br
+      <br>
       <p>
         University currently have 1,608 Academic Staff and 568 Administrative staff. Currently 13,119 students study here. 
       </p>
@@ -180,27 +232,43 @@
     <ul class="rounded">
       <li class="arrow"><a href="#bachelor">Bachelor</a></li>
       <li class="arrow"><a href="#master">Master's degree</a></li>
-      <li class="arrow"><a href="#minor">Minor offer</a></li>
-      <li class="arrow"><a href="#taster">Taster</a></li>
     </ul>
     <!-- Please place contents here using HTML & JavaScript -->
   </div>
-  <!-- Research -->
-  <div id="research">
-    <div class="toolbar">
-      <h1>Research</h1>
-      <a class="back" href="#home">Back</a>
-    </div>
-    <!-- Please place contents here using HTML & JavaScript -->
-  </div>
+
   <!-- The Faculty -->
   <div id="faculty">
     <div class="toolbar">
       <h1>The Faculty</h1>
       <a class="back" href="#home">Back</a>
     </div>
+    <h2>Information Systems and Applied Computer Sciences</h2>
+    <div class="info">
+        <p>
+            Information Systems and Applied Computer Sciences (WIAI) was established on 1 October 2001 and is characterized by an interdisciplinary curricular layout that remains the only one of its kind in Germany:
+
+            It combines the field of Information Systems, with its foundations in Economics and Computer Science, with a realm of Applied Computer Sciences focused on the humanities and human sciences, and also with classic subject areas pertaining to theoretical and practical Computer Science.
+            
+            Synergy with the university’s main focus areas in the humanities, human sciences and in social sciences, economics and business administration is fostered by integrative course offerings and joint research endeavours.
+            
+            Due to this application-oriented curricular profile within a forward-thinking, thoroughly integrated modern course offering, our graduates occupy a unique place in international education.
+        </p>
+      </div>
+    
+    <ul class="rounded">
+      <li class="arrow"><a href="#applied-computer-science">Applied Computer Science</a></li>
+      <li class="arrow"><a href="#computer-science">Computer Science</a></li>
+      <li class="arrow"><a href="#information-system">Information Systems</a></li>
+    </ul>
+
+    <h2>Importent Links</h2>
+    <ul class="rounded" id="facultyExternalLinks">
+      <!-- Links will be placed via JavaScript -->
+    </ul>
     <!-- Please place contents here using HTML & JavaScript -->
   </div>
+
+
   <!-- Subject Groups -->
   <div id="subjectgroups">
     <div class="toolbar">
@@ -210,6 +278,14 @@
     <!-- Please place contents here using HTML & JavaScript -->
   </div>
 
+  <!-- Research -->
+  <div id="research">
+      <div class="toolbar">
+        <h1>Research</h1>
+        <a class="back" href="#home">Back</a>
+      </div>
+      <!-- Please place contents here using HTML & JavaScript -->
+  </div>
 
 
   <div id="bachelor">
@@ -255,6 +331,44 @@
       <!-- Please place contents here using HTML & JavaScript -->
     </div>
 
+    <div id="applied-computer-science">
+        <div class="toolbar">
+          <h1>Applied Computer Science</h1>
+          <a class="back" href="#faculty">Back</a>
+        </div>
+        
+          <h2>Applied Computer Science Offers</h2>
+          <ul class="rounded" id="acsExternalLinks">
+            <!-- Links will be placed via JavaScript -->
+          </ul>
+        <!-- Please place contents here using HTML & JavaScript -->
+    </div>
+
+    <div id="computer-science">
+        <div class="toolbar">
+          <h1>Computer Science</h1>
+          <a class="back" href="#faculty">Back</a>
+        </div>
+        
+          <h2>Computer Science Offers</h2>
+          <ul class="rounded" id="csExternalLinks">
+            <!-- Links will be placed via JavaScript -->
+          </ul>
+        <!-- Please place contents here using HTML & JavaScript -->
+    </div>
+
+    <div id="information-system">
+        <div class="toolbar">
+          <h1>Information System</h1>
+          <a class="back" href="#faculty">Back</a>
+        </div>
+        
+          <h2>Information System Offers</h2>
+          <ul class="rounded" id="isExternalLinks">
+            <!-- Links will be placed via JavaScript -->
+          </ul>
+        <!-- Please place contents here using HTML & JavaScript -->
+    </div>
 
 </body>
 </html>
