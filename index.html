@@ -73,7 +73,17 @@
             home_loadExternalLinks() // for inital loading for first screen
             
             //.. do the same for the other sections
+
+            $("#studies").on("pageAnimationEnd", function(e, info){
+              console.debug('id: ' + this.id + ' and direction: ' + info.direction);
+              // Load data once
+              if (!$(this).data('loaded')) {
+                  bachelor_loadExternalLinks();
+                  $(this).data('loaded', true);  
+                };  
+            });
           });
+          //bachelor_loadExternalLinks() 
           
           // Scripts and Structures for Home
           
@@ -86,6 +96,16 @@
               $("#homeExternalLinks").append(link);
             });
             $('#home').data('loaded', true);  
+          }
+
+          function bachelor_loadExternalLinks(){
+            $.each(JSON.parse(localStorage['bachelor_externalLinks']), function() {
+              // build link
+              link = "<li class=\"forward\"><a href=\""+this.href+"\" target=\"_blank\">"+this.title+"</a></li>";
+              // append link
+              $("#bachelorExternalLinks").append(link);
+            });
+            $('#studies').data('loaded', true);  
           }
   </script>
 </head>
@@ -123,7 +143,7 @@
       <p>
         Establied on 1647 (initial) then re-founded on 1972. Current chancellor is Dagmar Steuer-Flieser and Current Precident is Godehard Ruppert.
       </p>
-      <br>
+      br
       <p>
         University currently have 1,608 Academic Staff and 568 Administrative staff. Currently 13,119 students study here. 
       </p>
@@ -137,6 +157,21 @@
       <h1>Study</h1>
       <a class="back" href="#home">Back</a>
     </div>
+    <h2>Welcome!</h2>
+    <div class="info">
+        <p>
+            On these pages you will find everything you need to know about the study opportunities at the Faculty of Business Informatics and Applied Computer Science of the University of Bamberg.
+    
+            Students of the faculty will find not only the study program information but also the examination and study regulations as well as module manuals and all contact persons.
+        </p>
+      </div>
+    
+    <ul class="rounded">
+      <li class="arrow"><a href="#bachelor">Bachelor</a></li>
+      <li class="arrow"><a href="#master">Master's degree</a></li>
+      <li class="arrow"><a href="#minor">Minor offer</a></li>
+      <li class="arrow"><a href="#taster">Taster</a></li>
+    </ul>
     <!-- Please place contents here using HTML & JavaScript -->
   </div>
   <!-- Research -->
@@ -163,5 +198,30 @@
     </div>
     <!-- Please place contents here using HTML & JavaScript -->
   </div>
+
+
+
+  <div id="bachelor">
+      <div class="toolbar">
+        <h1>Bachelor</h1>
+        <a class="back" href="#studies">Back</a>
+      </div>
+      <h2>Bachelor Study Programs</h2>
+      <div class="info">
+          <p>
+              The bachelor programs Applied Computer Science (AI), International Information Systems Management (IISM), Software Systems Science and Business Informatics (WI) lead to a first professional qualification (Bachelor of Science) in a standard period of 6 or 7 semesters , which is why a stay abroad in the Framework of profiling can be well integrated into the study.
+
+              There are no admission restrictions for the Bachelor's programs and enrollment is possible for both the winter and summer semesters .
+          </p>
+        </div>
+      
+        <h2>Bachelor Programs</h2>
+        <ul class="rounded" id="bachelorExternalLinks">
+          <!-- Links will be placed via JavaScript -->
+        </ul>
+      <!-- Please place contents here using HTML & JavaScript -->
+    </div>
+
+
 </body>
 </html>

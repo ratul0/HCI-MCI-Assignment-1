@@ -25,6 +25,26 @@ function prepareLocalStorage(inDevelopment){
        }
     };
     localStorage.setItem('home_externalLinks', JSON.stringify(home_externalLinks));
+
+    var bachelor_externalLinks = {
+      aps: {
+       title: "Applied Computer Science",
+       href: "https://www.uni-bamberg.de/ba-ai/"
+      },
+      iism: {
+       title: "International Information Systems Management",
+       href: "https://www.uni-bamberg.de/ba-iism/"
+      },
+      sss: {
+       title: "Software Systems Science",
+       href: "https://www.uni-bamberg.de/sosysc/"
+      },
+      bcs: {
+        title: "Business computer science",
+        href: "https://www.uni-bamberg.de/ba-wi/"
+       }
+    };
+    localStorage.setItem('bachelor_externalLinks', JSON.stringify(bachelor_externalLinks));
     
     
     // ****  Prepare Local Storage for Other Screens
