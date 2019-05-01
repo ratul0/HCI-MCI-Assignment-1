@@ -18,7 +18,11 @@ function prepareLocalStorage(inDevelopment){
       feki: {
        title: "Feki.de",
        href: "http://www.feki.de"
-      }
+      },
+      contact: {
+        title: "Contact Us",
+        href: "https://www.uni-bamberg.de/wiai/kontaktnavigation/kontakt/"
+       }
     };
     localStorage.setItem('home_externalLinks', JSON.stringify(home_externalLinks));
     
